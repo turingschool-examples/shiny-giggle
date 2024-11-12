@@ -81,4 +81,30 @@ RSpec.describe Auction do
         
         expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
     end
+
+    it 'can return key of Attendee object pointing to a value of a Hash.
+        Subhash key of :budget(symbol) => budget(integer)
+                       :items => items the attendee has bid on(array)' do
+        
+        @auction.add_item(@item1)
+        @auction.add_item(@item2)
+        @auction.add_item(@item3)
+        @auction.add_item(@item4)
+        @auction.add_item(@item5)
+
+        expect(@item1.bids).to eq({})
+
+        @item1.add_bid(@attendee1, 22)
+        @item1.add_bid(@attendee2, 20)
+        @item2.add_bid(@attendee2, 20)
+        @item2.add_bid(@attendee3, 50)
+        @item4.add_bid(@attendee3, 50)
+        
+        expect(@auction.bidder_info).to eq({
+          @attendee1 => {:budget => 50, :items => [@item1]},
+          @attendee2 => {:budget => 75, :items => [@item1, @item2]},
+          @attendee3 => {:budget => 100, :items => [@item2, @item4]}
+        })
+
+    end
 end

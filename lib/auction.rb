@@ -42,4 +42,24 @@ class Auction
         end
         bidders
    end
+
+   def bidder_info
+        hash = {}
+        @items.each do |item|
+            if !item.bids.empty?
+                item.bids.each do |bidder, amount|
+                    if hash[bidder]
+                        subhash = hash[bidder]
+                    else
+                        subhash = {}
+                        subhash[:budget] = bidder.budget
+                        subhash[:items] = []
+                    end
+                    subhash[:items] << item
+                    hash[bidder] = subhash
+                end
+            end
+        end
+        hash
+   end
 end
