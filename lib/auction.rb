@@ -19,4 +19,15 @@ class Auction
         end
     @item_names
     end
+
+    def unpopular_items
+        unpopular_items_array = []
+
+        @items.each do |item|
+            if item.bids.empty?
+                unpopular_items_array << item
+            end
+        end
+        unpopular_items_array
+    end
 end
