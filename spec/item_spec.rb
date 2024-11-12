@@ -8,6 +8,7 @@ RSpec.describe Item do
 
         @attendee1 = Attendee.new({name: 'Megan', budget: '$50'})
         @attendee2 = Attendee.new({name: 'Bob', budget: '$75'})
+        @attendee3 = Attendee.new({name: 'Mike', budget: '$100'})
     end
 
     it 'exists' do
@@ -42,5 +43,27 @@ RSpec.describe Item do
         @item1.add_bid(@attendee1, 22)
         
         expect(@item1.current_high_bid).to eq(22)
+    end
+
+    describe "#close_bidding" do
+        before(:each) do
+            @item1.add_bid(@attendee2, 20)
+            @item1.add_bid(@attendee1, 22)
+        end
+
+        it 'has a closed attribute defaulted to false' do
+            expect(@item1.closed).to be false
+        end
+
+        it 'can close bidding' do
+            expect(@item1.close_bidding).to eq("Closed!")
+            expect(@item1.closed).to be true
+        end
+
+        it 'can no longer accept new bids after closed' do
+            @item1.close_bidding
+
+            expect(@item1.add_bid(@attendee3, 24)).to eq("Bidding Closed!")
+        end
     end
 end
