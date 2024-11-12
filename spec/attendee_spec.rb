@@ -1,11 +1,12 @@
 require './lib/attendee'
+require './spec/spec_helper'
 
 RSpec.describe Attendee do
-    before(:each) do
-        @attendee1 = Attendee.new({name: 'Megan', budget: '$50'})
-        @attendee2 = Attendee.new({name: 'Bob', budget: '$75'})
-        @attendee3 = Attendee.new({name: 'Mike', budget: '$100'})
-    end
+    # before(:each) do
+    #     @attendee1 = Attendee.new({name: 'Megan', budget: '$50'})
+    #     @attendee2 = Attendee.new({name: 'Bob', budget: '$75'})
+    #     @attendee3 = Attendee.new({name: 'Mike', budget: '$100'})
+    # end
 
     it 'exists' do
         expect(@attendee1).to be_a(Attendee)

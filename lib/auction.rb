@@ -6,7 +6,7 @@ class Auction
     end
 
     def add_item(item)
-        @items << item
+        @items << item unless @items.include?(item)
     end
 
     def item_names
@@ -15,5 +15,9 @@ class Auction
             item_names << item.name
         end
       item_names.uniq
+    end
+
+    def unpopular_items
+        @items.select { |item| item.bids.empty? }
     end
 end

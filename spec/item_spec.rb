@@ -1,14 +1,7 @@
 require './lib/item'
+require './spec/spec_helper'
 
 RSpec.describe Item do 
-    before(:all) do
-        @item1 = Item.new('Chalkware Piggy Bank')
-        @item2 = Item.new('Bamboo Picture Frame')
-        @item3 = Item.new('Homemade Chocolate Chip Cookies')
-        @item4 = Item.new('2 Days Dogsitting')
-        @item5 = Item.new('Forever Stamps')
-    end
-
     describe 'instantiation' do
         it 'exists' do
             expect(@item1).to be_a(Item)
@@ -27,24 +20,21 @@ RSpec.describe Item do
         end
 
         it 'starts with an empty hash of bids' do
-        expect(@item1.bids).to eq({})
-        expect(@item2.bids).to eq({})
-        expect(@item3.bids).to eq({})
-        expect(@item4.bids).to eq({})
-        expect(@item5.bids).to eq({})
+            expect(@item1.bids).to eq({})
+            expect(@item2.bids).to eq({})
+            expect(@item3.bids).to eq({})
+            expect(@item4.bids).to eq({})
+            expect(@item5.bids).to eq({})
         end
     end
 
     describe 'behaviors' do
         it 'adds bids' do
-            attendee1 = double("attendee")
-            attendee2 = double("attendee")
-
-            @item1.add_bid(attendee2, 20)
-            @item1.add_bid(attendee1, 22)
+            @item1.add_bid(@attendee2, 20)
+            @item1.add_bid(@attendee1, 22)
 
             expect(@item1.bids.count).to eq 2
-            expect(@item1.bids).to eq( {attendee2 => 20, attendee1 => 22} )
+            expect(@item1.bids).to eq( {@attendee2 => 20, @attendee1 => 22} )
         end
 
         it 'lists the current high bid' do
