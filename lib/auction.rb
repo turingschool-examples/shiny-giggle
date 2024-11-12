@@ -21,4 +21,14 @@ class Auction
         end
         unpopular
     end
+
+    def potential_revenue
+        revenue = 0
+        @items.each do |item|
+            if !unpopular_items.include?(item)
+                revenue += item.current_high_bid
+            end
+        end
+        revenue
+    end
 end
