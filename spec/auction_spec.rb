@@ -1,5 +1,6 @@
 require './lib/item'
 require './lib/auction'
+require 'date'
 
 RSpec.describe Auction do
     before(:each) do 
@@ -105,6 +106,19 @@ RSpec.describe Auction do
           @attendee2 => {:budget => 75, :items => [@item1, @item2]},
           @attendee3 => {:budget => 100, :items => [@item2, @item4]}
         })
+    end
 
+    it "can return date of aution in dd/mm/yyyy" do
+        allow(Date).to receive(:today).and_return Date.new(2020, 2, 24)
+        expect(@auction.date).to eq("24/02/2020")
+
+        allow(Date).to receive(:today).and_return Date.new(1991, 8, 17)
+        expect(@auction.date).to eq("17/08/1991")
+
+        allow(Date).to receive(:today).and_return Date.new(1964, 11, 05)
+        expect(@auction.date).to eq("05/11/1964")
+
+        allow(Date).to receive(:today).and_return Date.new(2092, 2, 24)
+        expect(@auction.date).to eq("24/02/2092")
     end
 end

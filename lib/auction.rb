@@ -61,5 +61,9 @@ class Auction
             end
         end
         hash
-   end
+    end
+
+    def date
+        @date = Date.today.strftime("%d/%m/%Y")
+    end
 end
