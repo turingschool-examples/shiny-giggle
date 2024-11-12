@@ -10,9 +10,12 @@ class Item
     def add_bid(attendee, bid)
         if @bidding_open
             @bids[attendee] = bid
-        else
-            "Bidding for #{@name} is closed."
+            
         end
+    end
+
+    def bidders
+        @bids.keys.map(&:name).uniq
     end
 
     def current_high_bid

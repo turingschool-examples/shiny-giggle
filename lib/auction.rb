@@ -1,10 +1,10 @@
 class Auction
-    attr_reader :items, :attendees, :bidders
+    attr_reader :items, :attendees, :bids
 
     def initialize
         @items = []
         @attendees = []
-        @bidders = []
+        @bids = []
     end
 
     def add_item(item)
@@ -28,19 +28,20 @@ class Auction
             item.current_high_bid || 0
         end
     end
-
-    def add_attendee(attendee)
-        @attendees << attendee
-        @bidders << attendee.name
+    
+    def bidders
+        bidder_names = @items.flat_map do |item|
+            item.bidders
+        end
+        bidder_names.uniq
     end
-
+    
     def bidder_info
-        @attendees.each_with_object({}) do |attendee, info|
+        @bidders.each_with_object({}) do |attendee, info|
           info[attendee] = {
-            :budget => attendee.budget,
-            :items => attendee.items
+            :budget => @attendee.budget,
+            :items => @attendee.items
           }
         end
     end
-
 end

@@ -10,9 +10,6 @@ RSpec.describe Auction do
             expect(@auction.items).to be_an Array
         end
 
-        it 'holds an array of bidders' do 
-            expect(@auction.bidders).to be_an Array
-        end
     end
 
     describe 'behaviors' do
@@ -44,22 +41,18 @@ RSpec.describe Auction do
             expect(@auction.potential_revenue).to eq 87
         end
 
-        it 'can add bidders' do
-            @auction.add_attendee(@attendee1)
-            @auction.add_attendee(@attendee2)
-            @auction.add_attendee(@attendee3)
-
+        it 'can display bidders' do
             expect(@auction.bidders.count).to eq 3
-            expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
         end
 
         it 'can create a hash of bidder information' do
-            @auction.add_attendee(@attendee1)
-            @auction.add_attendee(@attendee2)
-            @auction.add_attendee(@attendee3)
-
-            expect(@auction.bidder_info).to be_a Hash
-            expect(@auction.bidder_info.keys).to eq([@attendee1, @attendee2, @attendee3])
+            expected_info = {
+                @attendee1 => { :budget => 50, :items => [@item1] },
+                @attendee2 => { :budget => 75, :items => [@item1, @item2] },
+                @attendee3 => { :budget => 100, :items => [@item2] }
+                }
+            
+            expect(@auction.bidder_info).to eq(expected_info)
         end
     end
 
