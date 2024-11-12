@@ -1,10 +1,11 @@
 require 'pry'
 
 class Auction
-    attr_reader :items
+    attr_reader :items, :item_names
 
     def initialize
         @items = []
+        @item_names = []
     end
 
     def add_item(item)
@@ -13,8 +14,8 @@ class Auction
 
     def item_names
         @items.each do |item|
-            item
-            binding.pry
+            @item_names << item.name
         end
+    @item_names
     end
 end
