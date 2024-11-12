@@ -95,6 +95,12 @@ RSpec.describe Auction do
             it 'can return an Array of bidders names' do
                 expect(@auction.bidders).to eq(["Bob", "Megan", "Mike"])
             end
+
+            describe "#list_bidder_objects" do
+                it 'can return a list of attendee objects that bid' do
+                    expect(@auction.list_bidder_objects).to eq(@attendee2, @attendee1, @attendee3)
+                end
+            end
         end
 
         describe "#bidder_info" do
