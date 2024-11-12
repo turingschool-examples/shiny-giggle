@@ -30,18 +30,15 @@ class Auction
     end
     
     def bidders
-        bidder_names = @items.flat_map do |item|
+        @attendees = @items.flat_map do |item|
             item.bidders
-        end
-        bidder_names.uniq
+        end.uniq
     end
+
     
     def bidder_info
-        @bidders.each_with_object({}) do |attendee, info|
-          info[attendee] = {
-            :budget => @attendee.budget,
-            :items => @attendee.items
-          }
+        @attendees.each_with_object({}) do |attendee, info|
+            info[attendee] = { :budget => attendee.budget, :items => attendee.items }
         end
     end
 end
