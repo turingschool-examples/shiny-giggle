@@ -121,9 +121,10 @@ RSpec.describe Auction do
                 expect(info[:items]).to be_an(Array)
 
                 info[:items].each do |item|
-                    bidders = item.keys
                     expect(item).to be_an(Item)
-                    expect(bidders.includes?(attendee)).to be true
+                    bids = item.bids
+                    bidders = bids.keys
+                    expect(bidders.include?(attendee)).to be true
                 end
             end
         end
