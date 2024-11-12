@@ -183,10 +183,12 @@ RSpec.describe Auction do
 
         # helper method to determine if an attendee can afford the bid
         describe "#can_afford" do
-            expect(@auction.can_afford(@item2, 28)).to be true
+            it 'can determine if an attendee can afford a bid' do    
+                expect(@auction.can_afford(@item2, 28)).to be true
         
-            @item5.add_bid(@attendee1, 15)
-            expect(@auction.can_afford(@item5, 15)).to be false
+                @item5.add_bid(@attendee1, 15)
+                expect(@auction.can_afford(@item5, 15)).to be false
+            end
         end
     end
 end
