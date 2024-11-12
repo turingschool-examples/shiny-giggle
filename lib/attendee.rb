@@ -3,6 +3,6 @@ class Attendee
     
     def initialize(info)
         @name = info[:name]
-        @budget = info[:budget]
+        @budget = info[:budget].delete("^0-9").to_i
     end
 end
