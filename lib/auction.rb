@@ -73,10 +73,19 @@ class Auction
             item.close_bidding
             item.bids.each do |bidder|
                 if bidder[0].budget > bidder[1]
-                    binding.pry
                 end
             end
         end
         hash
+    end
+
+    def potential_revenue
+        total = 0
+        @items.each do |item|
+            if !item.bids.empty?
+                total += item.bids.values.max
+            end
+        end
+        total
     end
 end
