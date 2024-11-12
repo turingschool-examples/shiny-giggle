@@ -29,6 +29,11 @@ RSpec.describe Item do
 
         @item1.add_bid(@attendee2, 20)
         @item1.add_bid(@attendee1, 22)
+
+        expect(@item1.bids).to eq({
+            @attendee2 => 20,
+            @attendee1 => 22
+        })
     end
 
     it 'can get the current high bid' do
@@ -38,5 +43,21 @@ RSpec.describe Item do
         @item1.add_bid(@attendee1, 22)
         
         expect(@item1.current_high_bid).to eq(22)
+    end
+
+    it 'no longer accepts new bid once bidding has closed' do
+        expect(@item1.bids).to eq({})
+
+        @item1.add_bid(@attendee2, 20)
+        @item1.add_bid(@attendee1, 22)
+
+        expect(@item1.bids).to eq({
+            @attendee2 => 20,
+            @attendee1 => 22
+        })
+
+        @item1.close_bidding
+
+        expect(@item1.add_bid(@attendee1, 22)).to eq("Bidding time is over")
     end
 end
