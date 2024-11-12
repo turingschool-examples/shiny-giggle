@@ -19,6 +19,8 @@ RSpec.describe Item do
         expect(@item2.name).to eq("Bamboo Picture Frame")
     end
 
+    # Iteration 2
+    
     it 'has a list of bids defaulted to an empty hash' do
         expect(@item1.bids).to eq({})
     end
@@ -35,5 +37,7 @@ RSpec.describe Item do
         })
     end
 
-   
+    it 'can determine the current highest bid' do
+        expect(@item1.current_high_bid).to eq(22)
+    end
 end
