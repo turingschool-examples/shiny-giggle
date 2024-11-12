@@ -1,3 +1,5 @@
+require 'date'
+
 class Auction
     attr_reader :items
 
@@ -59,6 +61,12 @@ class Auction
         bidder_info
     end
 
+    # def date
+    #     Date.today.to_s
+    # end
+
+   
+
     # Helper Method that returns an array of the attendee objects that bid
     def list_bidder_objects
         bidder_objects = []
@@ -74,4 +82,14 @@ class Auction
         end
         bidder_objects
     end
+
+    def can_afford(bidder, bid)
+        if bidder.budget >= bid
+            bidder.spend(bid)
+            true
+        else
+            false
+        end
+    end
+
 end
