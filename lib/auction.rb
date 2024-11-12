@@ -9,10 +9,12 @@ class Auction
 
     def add_item(item)
         @items << item
-        binding.pry
     end
 
     def item_names
-        raise NotImplementedError
+        @items.each do |item|
+            item
+            binding.pry
+        end
     end
 end
