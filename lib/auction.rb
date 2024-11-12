@@ -11,9 +11,9 @@ class Auction
 
     def item_names
       item_names = []
-        @items.each do |item|
-          item_names << item.name
+        @items.map do |item|
+            item_names << item.name
         end
-      item_names
+      item_names.uniq
     end
 end
