@@ -118,5 +118,11 @@ end
 
     expect(@auction.bidder_info).to eq(expected)
     end
-    
+    it 'can return an array of bidders names' do
+  @item1.add_bid(@attendee1, 20)
+  @item1.add_bid(@attendee2, 25)
+  @item3.add_bid(@attendee3, 15)
+
+  expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
+end
 end
