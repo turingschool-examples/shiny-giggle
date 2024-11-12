@@ -31,4 +31,18 @@ class Auction
         end
         revenue
     end
+
+    def bidders
+        bidders = []
+        @items.each do |item|
+            item_bidders = item.bids.keys
+
+            item_bidders.each do |bidder|
+                if !bidders.include?(bidder.name)
+                    bidders << bidder.name
+                end
+            end
+        end
+        bidders
+    end
 end
