@@ -1,4 +1,5 @@
 require './lib/item'
+require './lib/attendee'
 require './lib/auction'
 
 RSpec.describe Auction do
