@@ -28,7 +28,7 @@ class Auction
     @items.sum { |item| item.current_high_bid.to_i }
   end
 
-  # Compiles a hash of bidder information
+  # Compiles a hash of bidder information(important for Iteration pattern)
   # The hash keys are attendees, and values are sub-hashes with their budget and items they bid on
   def bidder_info
     info = {}
