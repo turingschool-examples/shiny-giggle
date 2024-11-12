@@ -25,9 +25,9 @@ RSpec.describe Item do
     item = Item.new('Chalkware Piggy Bank') # Create a new item
     attendee = Attendee.new({name: 'Megan', budget: '$50'}) # Create an attendee
 
-    item.add_bid(attendee, 20) # Add a bid to the item
+    item.add_bid(attendee, 20) # Adds bis to itm
 
-    # Expect the bids hash to correctly reflect the added bid
+    # Expect the bids hash to correctly reflect the added bid <<< Double check if edge case can be implemented after this if I have time or comment out
     expect(item.bids).to eq({attendee => 20})
   end
 end
