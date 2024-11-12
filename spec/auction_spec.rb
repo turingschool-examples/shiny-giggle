@@ -52,6 +52,15 @@ RSpec.describe Auction do
             expect(@auction.bidders.count).to eq 3
             expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
         end
+
+        it 'can create a hash of bidder information' do
+            @auction.add_attendee(@attendee1)
+            @auction.add_attendee(@attendee2)
+            @auction.add_attendee(@attendee3)
+
+            expect(@auction.bidder_info).to be_a Hash
+            expect(@auction.bidder_info.keys).to eq([@attendee1, @attendee2, @attendee3])
+        end
     end
 
 end
