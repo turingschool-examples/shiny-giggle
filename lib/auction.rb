@@ -66,4 +66,17 @@ class Auction
     def date
         @date = Date.today.strftime("%d/%m/%Y")
     end
+
+    def close_auction
+        hash = {}
+        @items.each do |item| 
+            item.close_bidding
+            item.bids.each do |bidder|
+                if bidder[0].budget > bidder[1]
+                    binding.pry
+                end
+            end
+        end
+        hash
+    end
 end

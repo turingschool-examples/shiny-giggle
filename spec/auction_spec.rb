@@ -121,4 +121,22 @@ RSpec.describe Auction do
         allow(Date).to receive(:today).and_return Date.new(2092, 2, 24)
         expect(@auction.date).to eq("24/02/2092")
     end
+
+    it 'can Hash with each Item object as a key pointing to a value of the Attendee object who won the item.' do
+        @auction.add_item(@item1)
+        @auction.add_item(@item2)
+        @auction.add_item(@item3)
+        @auction.add_item(@item4)
+        @auction.add_item(@item5)
+
+        expect(@item1.bids).to eq({})
+
+        @item1.add_bid(@attendee1, 22)
+        @item1.add_bid(@attendee2, 20)
+        @item2.add_bid(@attendee2, 20)
+        @item2.add_bid(@attendee3, 50)
+        @item4.add_bid(@attendee3, 50)
+        expect(@auction.close_auction).to eq()
+
+    end
 end
