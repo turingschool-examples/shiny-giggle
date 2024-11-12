@@ -9,6 +9,10 @@ RSpec.describe Auction do
         it 'holds an array of items' do
             expect(@auction.items).to be_an Array
         end
+
+        it 'holds an array of bidders' do 
+            expect(@auction.bidders).to be_an Array
+        end
     end
 
     describe 'behaviors' do
@@ -38,6 +42,15 @@ RSpec.describe Auction do
 
         it 'returns the sum of highest bids' do
             expect(@auction.potential_revenue).to eq 87
+        end
+
+        it 'can add bidders' do
+            @auction.add_attendee(@attendee1)
+            @auction.add_attendee(@attendee2)
+            @auction.add_attendee(@attendee3)
+
+            expect(@auction.bidders.count).to eq 3
+            expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
         end
     end
 

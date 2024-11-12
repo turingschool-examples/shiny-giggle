@@ -1,8 +1,9 @@
 class Auction
-    attr_reader :items
+    attr_reader :items, :bidders
 
     def initialize
         @items = []
+        @bidders = []
     end
 
     def add_item(item)
@@ -25,11 +26,9 @@ class Auction
         @items.sum do |item|
             item.current_high_bid || 0
         end
-        # total_highest = []
-        # require 'pry'; binding.pry
-        # @items.each do |item|
-        #     total_highest << @item.current_high_bid
-        # end
-        # total_highest.sum
+    end
+
+    def add_attendee(attendee)
+        @bidders << attendee.name
     end
 end
