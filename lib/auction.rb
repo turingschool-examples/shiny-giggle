@@ -6,6 +6,7 @@ class Auction
     def initialize
         @items = []
         @item_names = []
+        @bids = {}
     end
 
     def add_item(item)
