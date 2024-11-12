@@ -1,4 +1,7 @@
 require './lib/attendee'
+require './lib/auction'
+require './lib/attendee'
+require 'pry'
 
 RSpec.describe Attendee do
     before(:each) do
