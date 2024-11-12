@@ -40,7 +40,7 @@ RSpec.describe Auction do
 
     # Iteration 2
 
-    describe "iteration 2" do
+    describe "#unpopular/revenue" do
         before(:each) do
             @auction.add_item(@item1)
             @auction.add_item(@item2)
@@ -73,5 +73,30 @@ RSpec.describe Auction do
                 expect(@auction.potential_revenue).to eq(87)
             end
         end
+    end
+
+    # Iteration 3
+    describe "#bidders/bidder_info" do
+        before(:each) do
+            @auction.add_item(@item1)
+            @auction.add_item(@item2)
+            @auction.add_item(@item3)
+            @auction.add_item(@item4)
+            @auction.add_item(@item5)
+
+            @item1.add_bid(@attendee2, 20) 
+            @item1.add_bid(@attendee1, 22)
+            @item4.add_bid(@attendee3, 50)
+            @item3.add_bid(@attendee2, 15)
+            @item2.add_bid(@attendee1, 28)
+        end
+
+        describe "#bidders" do
+            it 'can return an Array of bidders names' do
+                expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
+            end
+        end
+
+        
     end
 end
