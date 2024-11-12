@@ -6,10 +6,12 @@ class Auction
     end
 
     def add_item(item)
-        @items.unshift(item)
+        @items << item
     end
 
     def item_names
-        raise NotImplementedError
+        @items.map do |item|
+            item.name
+        end
     end
 end
