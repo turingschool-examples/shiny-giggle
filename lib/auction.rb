@@ -50,17 +50,22 @@ class Auction
     end
 
 
-    # def bidder_info
-    #     # return hash -- {attendee object: {name: {budget: in, items: [items bid on]}
-    #     bidder_summary = {}
-    #     @items.each do |item| #go thru each item
-    #         item.bids.each do |name, _| #go thru bid, focus on key (bidder name)       
+    def bidder_info
+        # return hash -- {attendee object => {budget => integer, items =>[items bid on]}
+        bidder_summary = {}
+        @items.each do |item| #go thru each item
+            # bidders = []
+            item.bids.each do |bidder, _| #go thru bid, focus on key (bidder name)  
+                if bidder_summary.keys.include?(bidder) #see if that bidder/attendee already exists as a key
+                    bidder_summary[bidder][:items] << item
+                else
+                    bidder_summary[bidder] = {:budget => bidder.budget, :items => [item]}
+                end
+            end
+        end
         
-    #         end
-    #       end
-    #     end
-    #     bidder_summary
-    # end
+        bidder_summary
+    end
 
     # def close_bidding(item)
 

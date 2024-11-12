@@ -88,7 +88,7 @@ RSpec.describe Auction do
         expect(@auction.auction_bidders).to eq(["Bob", "Mike", "Ash"])
     end
 
-    xit '#bidder_info' do 
+    it '#bidder_info' do 
         @auction.add_item(@item1)
         @auction.add_item(@item2)
         @auction.add_item(@item3)
@@ -99,31 +99,33 @@ RSpec.describe Auction do
 
         @item1.add_bid(@attendee2, 20)
         @item1.add_bid(@attendee1, 22)
+        @item3.add_bid(@attendee2, 15)
+
+        # {attendee2: {name: {budget: 75, items: [items bid on]}
+        expect(@auction.bidder_info).to eq({@attendee2 => {budget: 75, items: [@item1, @item3]}, @attendee1 => {budget: 50, items: [@item1]}})
+
+        # @item4.add_bid(@attendee3, 50)
+        # @item4.add_bid(attendee4, 11)
+
+        # expect(@auction.bidder_info).to eq({@attendee2 => {budget: 75, items: [@item1, @item3]}, @attendee1 => {budget: 50, items: [@item1]}, @attendee3 => {budget: 100, items: [@item4]}, attendee4 => {budget: 75, items: [@item1]}})
+    end
+
+    xit '#close_bidding' do 
+        @auction.add_item(@item1)
+        @auction.add_item(@item2)
+        @auction.add_item(@item3)
+        @auction.add_item(@item4)
+        @auction.add_item(@item5)
+
+        attendee4 = Attendee.new({name: 'Ash', budget: '$75'})
+
+        @item1.add_bid(@attendee2, 20)
+        # @item1.add_bid(@attendee1, 22)
         @item4.add_bid(@attendee3, 50)
         @item4.add_bid(attendee4, 11)
         @item3.add_bid(@attendee2, 15)
 
         @auction.close_bidding(@item4)
-        # {attendee2: {name: {budget: 75, items: [items bid on]}
-        expect(@auction.close_bidding).to eq({attendee2: {Bob: {budget: 75, items: [item1, item3]}}})
+        expect(@auction.close_bidding).to eq("Bidding is officially closed!")
     end
-
-    # xit '#close_bidding' do 
-    #     @auction.add_item(@item1)
-    #     @auction.add_item(@item2)
-    #     @auction.add_item(@item3)
-    #     @auction.add_item(@item4)
-    #     @auction.add_item(@item5)
-
-    #     attendee4 = Attendee.new({name: 'Ash', budget: '$75'})
-
-    #     @item1.add_bid(@attendee2, 20)
-    #     # @item1.add_bid(@attendee1, 22)
-    #     @item4.add_bid(@attendee3, 50)
-    #     @item4.add_bid(attendee4, 11)
-    #     @item3.add_bid(@attendee2, 15)
-
-    #     @auction.close_bidding(@item4)
-    #     expect(@auction.close_bidding).to eq("Bidding is officially closed!")
-    # end
 end
