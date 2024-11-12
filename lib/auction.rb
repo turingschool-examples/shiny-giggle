@@ -22,4 +22,14 @@ class Auction
   def potential_revenue
     @items.sum { |item| item.current_high_bid.to_i }
   end
+
+  def bidder_info
+    info = {}
+    @items.each do |item|
+      item.bids.each do |attendee, _|
+        info[attendee] ||= { budget: attendee.budget, items: [] }
+        info[attendee][:items] << item
+        end
+    end
+    info
 end
