@@ -1,4 +1,3 @@
-require './lib/item'
 require './spec/spec_helper'
 
 RSpec.describe Item do 
