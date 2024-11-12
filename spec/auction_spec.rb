@@ -35,6 +35,10 @@ RSpec.describe Auction do
 
             expect(@auction.unpopular_items).to eq([@item2, @item5])
         end
+
+        it 'returns the sum of highest bids' do
+            expect(@auction.potential_revenue).to eq 87
+        end
     end
 
 end

@@ -20,4 +20,16 @@ class Auction
     def unpopular_items
         @items.select { |item| item.bids.empty? }
     end
+
+    def potential_revenue
+        @items.sum do |item|
+            item.current_high_bid || 0
+        end
+        # total_highest = []
+        # require 'pry'; binding.pry
+        # @items.each do |item|
+        #     total_highest << @item.current_high_bid
+        # end
+        # total_highest.sum
+    end
 end
