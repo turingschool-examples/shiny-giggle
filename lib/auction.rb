@@ -50,4 +50,18 @@ class Auction
         end
         names
     end
+
+    def bidder_objects
+        bidder_objects = []
+        @items.each do |item|
+            all_bidders_for_item = item.bids.keys
+
+            all_bidders_for_item.each do |bidder|
+                if !bidder_objects.include?(bidder)
+                    bidder_objects << bidder
+                end
+            end
+        end
+        bidder_objects
+    end
 end
