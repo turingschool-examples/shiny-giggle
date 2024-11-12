@@ -122,4 +122,71 @@ RSpec.describe Auction do
             end
         end
     end
+
+    # Iteration 4
+
+    # describe "#date" do
+    #     it 'can return the date of the auction' do
+    #         test_date = double("any date")
+
+    #         allow(test_date).to receive(:date).and_return("24/02/2020")
+    #         expect(@auction.date).to eq("24/02/2020")
+    #     end
+    # end
+
+    describe "#close_auction" do
+        before(:each) do
+            @auction.add_item(@item1)
+            @auction.add_item(@item2)
+            @auction.add_item(@item3)
+            @auction.add_item(@item4)
+            @auction.add_item(@item5)
+
+            @item1.add_bid(@attendee2, 20) 
+            @item1.add_bid(@attendee1, 22)
+            @item4.add_bid(@attendee3, 50)
+            @item3.add_bid(@attendee2, 15)
+            @item2.add_bid(@attendee1, 28)
+        end
+
+        it 'can close bidding on all items' do
+            @auction.close_auction
+
+            expect(@item1.closed).to eq true
+            expect(@item2.closed).to eq true
+            expect(@item3.closed).to eq true
+            expect(@item4.closed).to eq true
+            expect(@item5.closed).to eq true
+        end
+
+        it 'can return a hash of sold items' do
+            expect(@auction.close_auction).to eq({
+                @item1 => @attendee1,
+                @item2 => @attendee1,
+                @item3 => @attendee2,
+                @item4 => @attendee3,
+                @item5 => 'Not Sold'
+            })
+        end
+
+        it 'can only sell items if an attendee can afford the bid' do
+            @item5.add_bid(@attendee1, 15)
+
+            expect(@auction.close_auction).to eq({
+                @item1 => @attendee1,
+                @item2 => @attendee1,
+                @item3 => @attendee2,
+                @item4 => @attendee3,
+                @item5 => 'Not Sold'
+            })
+        end
+
+        # helper method to determine if an attendee can afford the bid
+        describe "#can_afford" do
+            expect(@auction.can_afford(@item2, 28)).to be true
+        
+            @item5.add_bid(@attendee1, 15)
+            expect(@auction.can_afford(@item5, 15)).to be false
+        end
+    end
 end
