@@ -33,16 +33,27 @@ class Auction
     end
 
     def bidders
-        bidders = []
+        bidders = list_bidder_objects
+        
+        return bidder_names = bidders.map do |bidder|
+            bidder.name
+        end
+    end
+
+
+    # Helper Method that returns an array of the attendee objects that bid
+    def list_bidder_objects
+        bidder_objects = []
+
         @items.each do |item|
             item_bidders = item.bids.keys
 
             item_bidders.each do |bidder|
-                if !bidders.include?(bidder.name)
-                    bidders << bidder.name
+                if !bidder_objects.include?(bidder)
+                    bidder_objects << bidder
                 end
             end
         end
-        bidders
+        bidder_objects
     end
 end
