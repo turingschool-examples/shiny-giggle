@@ -1,32 +1,59 @@
-require './lib/item'
-require './lib/auction'
+require './spec/spec_helper'
 
 RSpec.describe Auction do
-    before(:each) do 
-        @item1 = Item.new('Chalkware Piggy Bank')
-        @item2 = Item.new('Bamboo Picture Frame')
-        @auction = Auction.new
+    describe 'instantiation' do
+        it 'exists' do 
+            expect(@auction).to be_a(Auction)
+        end
+
+        it 'holds an array of items' do
+            expect(@auction.items).to be_an Array
+        end
+
     end
 
-    it 'exists' do 
-        expect(@auction).to be_a(Auction)
+    describe 'behaviors' do
+        it 'can add items' do
+            expect(@auction.items).to eq([@item1, @item2, @item3, @item4, @item5])
+            expect(@auction.items.count).to eq 5
+        end
+
+        it ' can list items in the auction' do 
+            expect(@auction.item_names).to eq(["Chalkware Piggy Bank", "Bamboo Picture Frame", "Homemade Chocolate Chip Cookies", "2 Days Dogsitting", "Forever Stamps"])
+        end
+
+        it 'returns items with 0 bids' do
+            @item1.add_bid(@attendee2, 20)
+            @item1.add_bid(@attendee1, 22)
+
+            expect(@auction.unpopular_items).to eq([@item2, @item3, @item4, @item5])
+
+            @item4.add_bid(@attendee3, 50)
+
+            expect(@auction.unpopular_items).to eq([@item2, @item3, @item5])
+
+            @item3.add_bid(@attendee2, 15)
+
+            expect(@auction.unpopular_items).to eq([@item2, @item5])
+        end
+
+        it 'returns the sum of highest bids' do
+            expect(@auction.potential_revenue).to eq 87
+        end
+
+        it 'can display bidders' do
+            expect(@auction.bidders.count).to eq 3
+        end
+
+        it 'can create a hash of bidder information' do
+            expected_info = {
+                @attendee1 => { :budget => 50, :items => [@item1] },
+                @attendee2 => { :budget => 75, :items => [@item1, @item2] },
+                @attendee3 => { :budget => 100, :items => [@item2] }
+                }
+            
+            expect(@auction.bidder_info).to eq(expected_info)
+        end
     end
 
-    it 'has attributes' do
-        expect(@auction.items).to eq([])
-    end
-
-    it 'add_item' do
-        @auction.add_item(@item1)
-        @auction.add_item(@item2)
-
-        expect(@auction.items).to eq([@item1, @item2])
-    end
-
-    it 'item_names' do 
-        @auction.add_item(@item1)
-        @auction.add_item(@item2)
-
-        expect(@auction.item_names).to eq(["Chalkware Piggy Bank", "Bamboo Picture Frame"])
-    end
 end
