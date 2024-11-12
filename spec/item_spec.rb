@@ -39,5 +39,20 @@ RSpec.describe Item do
         it 'lists the current high bid' do
             expect(@item1.current_high_bid).to eq 22
         end
+
+        it 'can close bidding for an item' do
+            expect(@item1.close_bidding).to eq("Bidding is now closed for Chalkware Piggy Bank.")
+        end
+
+        it 'prevents additional bids for an item after closing' do
+            @item5.add_bid(@attendee1, 30)
+            @item5.add_bid(@attendee2, 50)
+
+            @item5.close_bidding
+
+            @item5.add_bid(@attendee3, 55)
+
+            expect(@item5.bids).to eq({ @attendee1 => 30, @attendee2 => 50 })
+        end
     end
 end
