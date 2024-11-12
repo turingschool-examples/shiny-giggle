@@ -18,9 +18,9 @@ RSpec.describe Auction do
     @auction.add_item(@item4)
     @auction.add_item(@item5)
 
-    @attendee1 = Attendee.new({name: 'Megan', budget: '$50'})
-    @attendee2 = Attendee.new({name: 'Bob', budget: '$75'})
-    @attendee3 = Attendee.new({name: 'Mike', budget: '$100'})
+    @attendee1 = Attendee.new({ name: 'Megan', budget: '$50' })
+    @attendee2 = Attendee.new({ name: 'Bob', budget: '$75' })
+    @attendee3 = Attendee.new({ name: 'Mike', budget: '$100' })
   end
 
   it 'exists and has attributes' do
@@ -33,25 +33,25 @@ RSpec.describe Auction do
   end
 
   it 'can identify unpopular items (items with no bids)' do
-    # Add bids to items
+    # Add bids to some items
     @item1.add_bid(@attendee1, 20)
     @item4.add_bid(@attendee3, 50)
 
-    # Items with no bids are identified as unpopular
+    # Verify items with no bids are identified as unpopular
     expect(@auction.unpopular_items).to eq([@item2, @item3, @item5])
   end
 
   it 'updates unpopular items when bids are added' do
-    # Add bids to items
+    # Add bids to some items
     @item1.add_bid(@attendee1, 20)
     @item4.add_bid(@attendee3, 50)
 
     expect(@auction.unpopular_items).to eq([@item2, @item3, @item5])
 
-    # Add a bid to item 3
+    # Add a bid to another item
     @item3.add_bid(@attendee2, 15)
 
-    # Unpopular items excludes the item that received a bid
+    # Verify the updated list of unpopular items
     expect(@auction.unpopular_items).to eq([@item2, @item5])
   end
 
@@ -62,17 +62,17 @@ RSpec.describe Auction do
     @item4.add_bid(@attendee3, 50)
     @item3.add_bid(@attendee2, 15)
 
-    # Potential revenue is the sum of the highest bids
+    # Verify potential revenue as the sum of highest bids
     expect(@auction.potential_revenue).to eq(90)
   end
 
   it 'handles potential revenue with no bids' do
-    # No bids added to any items
+    # Verify potential revenue is zero when no bids are added
     expect(@auction.potential_revenue).to eq(0)
   end
 
   it 'handles edge cases for unpopular items' do
-    # No bids added initially
+    # Verify all items are initially unpopular
     expect(@auction.unpopular_items).to eq([@item1, @item2, @item3, @item4, @item5])
 
     # Add bids to all items
@@ -82,47 +82,43 @@ RSpec.describe Auction do
     @item4.add_bid(@attendee1, 40)
     @item5.add_bid(@attendee2, 50)
 
-    # All items have bids; there should be no unpopular items
+    # Verify there are no unpopular items after all have bids
     expect(@auction.unpopular_items).to eq([])
   end
 
-  # Tests for Auction Bidders
   it 'can return an array of bidders names' do
+    # Add bids to items
     @item1.add_bid(@attendee1, 20)
     @item1.add_bid(@attendee2, 25)
     @item3.add_bid(@attendee3, 15)
 
+    # Verify the list of bidder names
     expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
-end
-# Tests for Auction Bidder_info
+  end
+
   it 'can return bidder info' do
+    # Add bids to items
     @item1.add_bid(@attendee1, 20)
     @item1.add_bid(@attendee2, 25)
     @item3.add_bid(@attendee2, 15)
     @item4.add_bid(@attendee3, 50)
 
+    # Verify the bidder info hash
     expected = {
-        @attendee1 => {
+      @attendee1 => {
         :budget => 50,
         :items => [@item1]
-        },
-        @attendee2 => {
+      },
+      @attendee2 => {
         :budget => 75,
         :items => [@item1, @item3]
-        },
-        @attendee3 => {
+      },
+      @attendee3 => {
         :budget => 100,
         :items => [@item4]
-        }
+      }
     }
 
     expect(@auction.bidder_info).to eq(expected)
-    end
-    it 'can return an array of bidders names' do
-  @item1.add_bid(@attendee1, 20)
-  @item1.add_bid(@attendee2, 25)
-  @item3.add_bid(@attendee3, 15)
-
-  expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
-end
+  end
 end
