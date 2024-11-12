@@ -1,3 +1,5 @@
+require 'pry'
+
 class Auction
     attr_reader :items
 
@@ -6,7 +8,8 @@ class Auction
     end
 
     def add_item(item)
-        @items.unshift(item)
+        @items << item
+        binding.pry
     end
 
     def item_names

@@ -4,5 +4,6 @@ class Attendee
     def initialize(info)
         @name = info[:name]
         @budget = info[:budget]
+        @items = []
     end
 end

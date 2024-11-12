@@ -1,8 +1,11 @@
 require './lib/attendee'
+require './lib/auction'
+require './lib/attendee'
+require 'pry'
 
 RSpec.describe Attendee do
     before(:each) do
-        @attendee = Attendee.new({name: 'Megan', budget: '$50'})
+        @attendee = Attendee.new({name: 'Megan', budget: 50})
     end
 
     it 'exists' do

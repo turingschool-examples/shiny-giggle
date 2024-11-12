@@ -1,4 +1,6 @@
 require './lib/item'
+require './lib/auction'
+require './lib/attendee'
 
 RSpec.describe Item do 
     before(:each) do
@@ -8,6 +10,7 @@ RSpec.describe Item do
 
     it 'exists' do
         expect(@item1).to be_a(Item)
+        expect(@item2).to be_a(Item)
     end
 
     it 'has attributes' do
