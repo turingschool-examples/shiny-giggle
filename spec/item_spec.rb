@@ -1,7 +1,7 @@
 require './lib/item'
 
 RSpec.describe Item do 
-    before(:each) do
+    before(:all) do
         @item1 = Item.new('Chalkware Piggy Bank')
         @item2 = Item.new('Bamboo Picture Frame')
         @item3 = Item.new('Homemade Chocolate Chip Cookies')
@@ -32,6 +32,23 @@ RSpec.describe Item do
         expect(@item3.bids).to eq({})
         expect(@item4.bids).to eq({})
         expect(@item5.bids).to eq({})
+        end
+    end
+
+    describe 'behaviors' do
+        it 'adds bids' do
+            attendee1 = double("attendee")
+            attendee2 = double("attendee")
+
+            @item1.add_bid(attendee2, 20)
+            @item1.add_bid(attendee1, 22)
+
+            expect(@item1.bids.count).to eq 2
+            expect(@item1.bids).to eq( {attendee2 => 20, attendee1 => 22} )
+        end
+
+        it 'lists the current high bid' do
+            expect(@item1.current_high_bid).to eq 22
         end
     end
 end
