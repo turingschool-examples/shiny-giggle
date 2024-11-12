@@ -82,4 +82,19 @@ RSpec.describe Auction do
             expect(@auction.bidders).to contain_exactly('Megan', 'Bob', 'Mike')
         end
     end
+
+    describe '#bidder_objects' do
+        it 'returns an array of all attendee objects that have a bid placed' do
+            @auction.add_item(@item1)
+            @auction.add_item(@item3)
+            @auction.add_item(@item4)
+
+            @item1.add_bid(@attendee2, 20)
+            @item1.add_bid(@attendee1, 22)
+            @item3.add_bid(@attendee2, 15)
+            @item4.add_bid(@attendee3, 50)
+
+            expect(@auction.bidder_objects).to contain_exactly(@attendee1, @attendee2, @attendee3)
+        end
+    end
 end
