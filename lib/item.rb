@@ -1,9 +1,10 @@
 class Item
-    attr_reader :name, :bids
+    attr_reader :name, :bids, :closed
      
     def initialize(name)
         @name = name
         @bids = {}
+        @closed = false
     end
 
     def add_bid(attendee, bid)
@@ -15,5 +16,11 @@ class Item
             bid
         end
         highest[1]
+    end
+
+    def close_bidding
+        @closed = true
+
+        "Closed!"
     end
 end
