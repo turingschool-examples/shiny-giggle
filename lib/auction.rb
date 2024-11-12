@@ -1,5 +1,5 @@
 class Auction
-    attr_reader :items
+    attr_reader :items, :bidding_open
 
     def initialize
         @items = []
@@ -36,4 +36,36 @@ class Auction
         end
         revenue_sum
     end
+
+    def auction_bidders
+        bidder_names = []
+        @items.each do |item| #go thru each item
+            item.bids.each do |bidder, _| #go thru bid, focus on key (bidder name)       
+            if !bidder_names.include?(bidder.name) #protect for duplicates
+                bidder_names << bidder.name 
+            end
+          end
+        end
+        bidder_names
+    end
+
+
+    # def bidder_info
+    #     # return hash -- {attendee object: {name: {budget: in, items: [items bid on]}
+    #     bidder_summary = {}
+    #     @items.each do |item| #go thru each item
+    #         item.bids.each do |name, _| #go thru bid, focus on key (bidder name)       
+        
+    #         end
+    #       end
+    #     end
+    #     bidder_summary
+    # end
+
+    # def close_bidding(item)
+
+    #     #should update the item so that it will not accept additional bids
+    #     #Return value of your choice; ensure it follows the spec above such that 
+    #     #closing the bidding on an item makes it so the item will no longer accept new bids.
+    # end
 end
