@@ -17,6 +17,8 @@ RSpec.describe Item do
         expect(@item2.name).to eq("Bamboo Picture Frame")
         expect(@item1.bids).to eq({})
         expect(@item2.bids).to eq({})
+        expect(@item1.closed?).to be false
+        expect(@item2.closed?).to be false
     end
 
     describe '#add_bid' do
@@ -36,6 +38,21 @@ RSpec.describe Item do
             @item1.add_bid(@attendee1, 22)
 
             expect(@item1.current_high_bid).to eq(22)
+        end
+    end
+
+    describe '#close_bidding' do
+        it 'prevents future bids from being added once run' do
+            expect(@item1.closed?).to be false
+
+            @item1.add_bid(@attendee2, 20)
+            expect(@item1.bids).to eq({@attendee2=>20})
+
+            @item1.close_bidding
+            expect(@item1.closed?).to be true
+
+            @item1.add_bid(@attendee1, 22)
+            expect(@item1.bids).to eq({@attendee2=>20})
         end
     end
 end

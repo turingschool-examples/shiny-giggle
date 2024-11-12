@@ -67,4 +67,66 @@ RSpec.describe Auction do
             expect(@auction.potential_revenue).to eq(87)
         end
     end
+
+    describe '#bidders' do
+        it 'returns an array of all the current bidders names' do
+            @auction.add_item(@item1)
+            @auction.add_item(@item3)
+            @auction.add_item(@item4)
+
+            @item1.add_bid(@attendee2, 20)
+            @item1.add_bid(@attendee1, 22)
+            @item3.add_bid(@attendee2, 15)
+            @item4.add_bid(@attendee3, 50)
+
+            expect(@auction.bidders).to contain_exactly('Megan', 'Bob', 'Mike')
+        end
+    end
+
+    describe '#bidder_objects' do
+        it 'returns an array of all attendee objects that have a bid placed' do
+            @auction.add_item(@item1)
+            @auction.add_item(@item3)
+            @auction.add_item(@item4)
+
+            @item1.add_bid(@attendee2, 20)
+            @item1.add_bid(@attendee1, 22)
+            @item3.add_bid(@attendee2, 15)
+            @item4.add_bid(@attendee3, 50)
+
+            expect(@auction.bidder_objects).to contain_exactly(@attendee1, @attendee2, @attendee3)
+        end
+    end
+
+    describe '#bidder_info' do
+        it 'returns a nested hash of bidder information' do
+            @auction.add_item(@item1)
+            @auction.add_item(@item3)
+            @auction.add_item(@item4)
+
+            @item1.add_bid(@attendee2, 20)
+            @item1.add_bid(@attendee1, 22)
+            @item3.add_bid(@attendee2, 15)
+            @item4.add_bid(@attendee3, 50)
+
+            bidder_info = @auction.bidder_info
+
+            expect(bidder_info).to be_a(Hash)
+            bidder_info.each do |attendee, info|
+                expect(attendee).to be_a(Attendee)
+                expect(info).to be_a(Hash)
+
+                expect(info.keys).to contain_exactly(:budget, :items)
+                expect(info[:budget]).to eq(attendee.budget)
+                expect(info[:items]).to be_an(Array)
+
+                info[:items].each do |item|
+                    expect(item).to be_an(Item)
+                    bids = item.bids
+                    bidders = bids.keys
+                    expect(bidders.include?(attendee)).to be true
+                end
+            end
+        end
+    end
 end
