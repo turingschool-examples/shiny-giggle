@@ -3,6 +3,6 @@ class Attendee
     
     def initialize(info)
         @name = info[:name]
-        @budget = info[:budget]
+        @budget = info[:budget].gsub(/\D/,'').to_i
     end
 end
