@@ -95,19 +95,21 @@ RSpec.describe Auction do
         @auction.add_item(@item4)
         @auction.add_item(@item5)
 
-        attendee4 = Attendee.new({name: 'Ash', budget: '$75'})
+        attendee4 = Attendee.new({name: 'Ash', budget: '$70'})
 
         @item1.add_bid(@attendee2, 20)
         @item1.add_bid(@attendee1, 22)
         @item3.add_bid(@attendee2, 15)
 
-        # {attendee2: {name: {budget: 75, items: [items bid on]}
+        # returns --> {attendee2: {name: {budget: 75, items: [items bid on]}
         expect(@auction.bidder_info).to eq({@attendee2 => {budget: 75, items: [@item1, @item3]}, @attendee1 => {budget: 50, items: [@item1]}})
 
-        # @item4.add_bid(@attendee3, 50)
-        # @item4.add_bid(attendee4, 11)
+        @item2.add_bid(@attendee3, 50)
+        @item4.add_bid(attendee4, 11)
 
-        # expect(@auction.bidder_info).to eq({@attendee2 => {budget: 75, items: [@item1, @item3]}, @attendee1 => {budget: 50, items: [@item1]}, @attendee3 => {budget: 100, items: [@item4]}, attendee4 => {budget: 75, items: [@item1]}})
+        expected_2 = {@attendee2 => {budget: 75, items: [@item1, @item3]}, @attendee1 => {budget: 50, items: [@item1]}, @attendee3 => {budget: 100, items: [@item2]}, attendee4 => {budget: 70, items: [@item4]}}
+    
+        expect(@auction.bidder_info).to eq(expected_2)
     end
 
     xit '#close_bidding' do 
@@ -117,15 +119,12 @@ RSpec.describe Auction do
         @auction.add_item(@item4)
         @auction.add_item(@item5)
 
-        attendee4 = Attendee.new({name: 'Ash', budget: '$75'})
-
         @item1.add_bid(@attendee2, 20)
-        # @item1.add_bid(@attendee1, 22)
         @item4.add_bid(@attendee3, 50)
         @item4.add_bid(attendee4, 11)
         @item3.add_bid(@attendee2, 15)
 
-        @auction.close_bidding(@item4)
-        expect(@auction.close_bidding).to eq("Bidding is officially closed!")
+        # @auction.close_bidding(@item4)
+        expect(@auction.close_bidding(@item4)).to eq("Bidding on '2 Days Dogsitting' is officially closed!")
     end
 end

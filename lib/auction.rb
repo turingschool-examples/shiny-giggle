@@ -68,9 +68,10 @@ class Auction
     end
 
     # def close_bidding(item)
-
     #     #should update the item so that it will not accept additional bids
     #     #Return value of your choice; ensure it follows the spec above such that 
     #     #closing the bidding on an item makes it so the item will no longer accept new bids.
+
+    #     puts "Bidding on #{item.name} is officially closed!"
     # end
 end
