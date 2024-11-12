@@ -1,5 +1,6 @@
 require './lib/item'
 require './lib/auction'
+require 'date'
 
 RSpec.describe Auction do
     before(:each) do 
@@ -21,7 +22,7 @@ RSpec.describe Auction do
 
     it 'has attributes' do
         expect(@auction.items).to eq([])
-        expect(@auction.date).to eq('24/02/2024')
+        expect(@auction.date).to eq('24/02/2020')
     end
 
     it 'add_item' do
