@@ -65,7 +65,25 @@ class Auction
     #     Date.today.to_s
     # end
 
-   
+    def close_auction
+        sales = {}
+        @items.each do |item|
+            item.close_bidding # Close bidding on all items
+        
+            if item.bids.empty?
+                sales[item] = 'Not Sold'
+            else
+                item.bids.select do |bidder, bid|
+                    if bid == item.current_high_bid && can_afford(bidder, bid)
+                        sales[item] = bidder
+                    else 
+                        sales[item] = 'Not Sold'
+                    end
+                end
+            end
+        end
+        sales
+    end
 
     # Helper Method that returns an array of the attendee objects that bid
     def list_bidder_objects
