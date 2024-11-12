@@ -1,7 +1,7 @@
-class Items
+class Item
     attr_reader :name
      
     def initialize(name)
-        @name = "Chalkware Piggy Bank"
+        @name = name
     end
 end
