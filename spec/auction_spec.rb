@@ -85,12 +85,38 @@ RSpec.describe Auction do
     # All items have bids; there should be no unpopular items
     expect(@auction.unpopular_items).to eq([])
   end
+
+  # Tests for Auction Bidders
   it 'can return an array of bidders names' do
-  @item1.add_bid(@attendee1, 20)
-  @item1.add_bid(@attendee2, 25)
-  @item3.add_bid(@attendee3, 15)
+    @item1.add_bid(@attendee1, 20)
+    @item1.add_bid(@attendee2, 25)
+    @item3.add_bid(@attendee3, 15)
 
-  expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
+    expect(@auction.bidders).to eq(["Megan", "Bob", "Mike"])
 end
+# Tests for Auction Bidder_info
+  it 'can return bidder info' do
+    @item1.add_bid(@attendee1, 20)
+    @item1.add_bid(@attendee2, 25)
+    @item3.add_bid(@attendee2, 15)
+    @item4.add_bid(@attendee3, 50)
 
+    expected = {
+        @attendee1 => {
+        :budget => 50,
+        :items => [@item1]
+        },
+        @attendee2 => {
+        :budget => 75,
+        :items => [@item1, @item3]
+        },
+        @attendee3 => {
+        :budget => 100,
+        :items => [@item4]
+        }
+    }
+
+    expect(@auction.bidder_info).to eq(expected)
+    end
+    
 end
