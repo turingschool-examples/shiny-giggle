@@ -45,6 +45,7 @@ RSpec.describe Item do
         expect(@item1.current_high_bid).to eq(22)
     end
 
+    # Iteration 3
     describe "#close_bidding" do
         before(:each) do
             @item1.add_bid(@attendee2, 20)
