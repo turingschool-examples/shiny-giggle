@@ -1,5 +1,6 @@
 require './lib/item'
 require './lib/auction'
+require 'date'
 
 RSpec.describe Auction do
     before(:each) do 
@@ -8,6 +9,7 @@ RSpec.describe Auction do
         @item3 = Item.new('Homemade Chocolate Chip Cookies')
         @item4 = Item.new('2 Days Dogsitting')
         @item5 = Item.new('Forever Stamps')
+        allow(Date).to receive(:today).and_return(Date.new(2020, 02, 24))
         @auction = Auction.new
         @attendee1 = Attendee.new({name: 'Megan', budget: '$50'})
         @attendee2 = Attendee.new({name: 'Bob', budget: '$75'})
@@ -20,6 +22,7 @@ RSpec.describe Auction do
 
     it 'has attributes' do
         expect(@auction.items).to eq([])
+        expect(@auction.date).to eq('24/02/2020')
     end
 
     it 'add_item' do
