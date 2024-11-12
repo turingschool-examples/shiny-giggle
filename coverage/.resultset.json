@@ -1,0 +1,126 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/hani-sagal/turing_work/1mod/IC_challenges/Week_6_Challenge/shiny-giggle/spec/attendee_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/hani-sagal/turing_work/1mod/IC_challenges/Week_6_Challenge/shiny-giggle/lib/attendee.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/hani-sagal/turing_work/1mod/IC_challenges/Week_6_Challenge/shiny-giggle/spec/auction_spec.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/hani-sagal/turing_work/1mod/IC_challenges/Week_6_Challenge/shiny-giggle/lib/item.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/hani-sagal/turing_work/1mod/IC_challenges/Week_6_Challenge/shiny-giggle/lib/auction.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/hani-sagal/turing_work/1mod/IC_challenges/Week_6_Challenge/shiny-giggle/spec/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1731429084
+  }
+}
