@@ -13,4 +13,9 @@ RSpec.describe Attendee do
         expect(@attendee.name).to eq('Megan')
         expect(@attendee.budget).to eq(50)
     end
+
+    it 'can spend budget' do
+        @attendee.spend(22)
+        expect(@attendee.budget).to eq(28)
+    end
 end
