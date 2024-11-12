@@ -1,4 +1,4 @@
-require './lib/attendee'
+require 'spec_helper'
 
 RSpec.describe Attendee do
     before(:each) do
