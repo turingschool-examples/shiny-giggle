@@ -97,6 +97,23 @@ RSpec.describe Auction do
             end
         end
 
-        
+        describe "#bidder_info" do
+            it 'can return a hash of bidders info' do
+                expect(@auction.bidder_info).to eq({
+                    @attendee1 => {
+                        budget: 50,
+                        items: [@item1, @item2]
+                    },
+                    @attendee2 => {
+                        budget: 75,
+                        items: [@item1, @item3]
+                    },
+                    @attendee3 => {
+                        budget: 100,
+                        items: [@item4]
+                    }
+                })
+            end
+        end
     end
 end
