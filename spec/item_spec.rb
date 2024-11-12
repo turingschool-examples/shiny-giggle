@@ -30,4 +30,13 @@ RSpec.describe Item do
     # Expect the bids hash to correctly reflect the added bid <<< Double check if edge case can be implemented after this if I have time or comment out
     expect(item.bids).to eq({attendee => 20})
   end
+  # Test for Item Close bidding
+  it 'can close bidding for an item' do
+    @item1.add_bid(@attendee1, 20)
+    @item1.add_bid(@attendee2, 25)
+
+    @item1.close_bidding
+    @item1.add_bid(@attendee3, 30)
+
+    expect(@item1.bids).to eq({@attendee1 => 20, @attendee2 => 25})
 end
