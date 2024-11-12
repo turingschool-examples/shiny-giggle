@@ -1,7 +1,4 @@
-require './lib/item'
-
-
-require './lib/auction'
+require 'spec_helper'
 
 RSpec.describe Auction do
     before(:each) do 

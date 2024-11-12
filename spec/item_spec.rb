@@ -1,4 +1,4 @@
-require './lib/item'
+require 'spec_helper'
 
 RSpec.describe Item do 
     before(:each) do
