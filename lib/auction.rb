@@ -40,6 +40,24 @@ class Auction
         end
     end
 
+    def bidder_info
+        bidder_info = {}
+        bidder_objects = list_bidder_objects
+
+        bidder_objects.each do |bidder|
+            @items.each do |item|
+                if item.bids.keys.include?(bidder)
+                    if !bidder_info.keys.include?(bidder)
+                        bidder_info[bidder] =  {budget: bidder.budget,
+                                                items: [item]}
+                    else
+                        bidder_info[bidder][:items] << item
+                    end
+                end
+            end
+        end
+        bidder_info
+    end
 
     # Helper Method that returns an array of the attendee objects that bid
     def list_bidder_objects

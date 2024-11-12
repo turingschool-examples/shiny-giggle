@@ -98,7 +98,7 @@ RSpec.describe Auction do
 
             describe "#list_bidder_objects" do
                 it 'can return a list of attendee objects that bid' do
-                    expect(@auction.list_bidder_objects).to eq(@attendee2, @attendee1, @attendee3)
+                    expect(@auction.list_bidder_objects).to eq([@attendee2, @attendee1, @attendee3])
                 end
             end
         end
