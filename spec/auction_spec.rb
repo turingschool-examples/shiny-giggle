@@ -67,4 +67,19 @@ RSpec.describe Auction do
             expect(@auction.potential_revenue).to eq(87)
         end
     end
+
+    describe '#bidders' do
+        it 'returns an array of all the current bidders names' do
+            @auction.add_item(@item1)
+            @auction.add_item(@item3)
+            @auction.add_item(@item4)
+
+            @item1.add_bid(@attendee2, 20)
+            @item1.add_bid(@attendee1, 22)
+            @item3.add_bid(@attendee2, 15)
+            @item4.add_bid(@attendee3, 50)
+
+            expect(@auction.bidders).to contain_exactly('Megan', 'Bob', 'Mike')
+        end
+    end
 end
